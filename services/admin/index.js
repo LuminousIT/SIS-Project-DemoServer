@@ -80,4 +80,14 @@ const getRFID = async (request, response, next) => {
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
-module.exports = { registerAdmin, login, getAdmins, getRFID };
+
+const getHomepage = async (request, response, next) => {
+  try {
+    return response
+      .status(200)
+      .json({ status: "success", content: "Hello World" });
+  } catch (error) {
+    return response.status(500).json({ status: "failed", msg: error.message });
+  }
+};
+module.exports = { registerAdmin, login, getAdmins, getRFID, getHomepage };
