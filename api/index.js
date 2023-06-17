@@ -1,31 +1,24 @@
-const express = require("express");
-const app = express();
-const route_handler = require("./routes/index");
-const connectDB = require("./db/index");
-require("dotenv").config();
+const router = require("express").Router();
+const admin_route_handler = require("./admin/index");
+const bookings_route_handler = require("./bookings/index");
+const facility_route_handler = require("./facility/index");
 
-const helmet = require("helmet");
-const compression = require("compression");
-const cors = require("cors");
+const setup_request = (request, response, next) => {
+  request.headers["access-control-allow-origin"] = "*";
+  request.headers["access-control-allow-headers"] = "*";
 
-app.use(cors());
-// app.use(morgan("tiny"));
-app.use(express.json());
-app.use(compression());
-app.use(helmet());
-
-app.use("/", route_handler);
-
-const PORT = process.env.PORT;
-
-const startApp = async () => {
-  try {
-    const url = process.env.DB_URL;
-    await connectDB(url);
-    app.listen(PORT, console.log(`server is listening on PORT ${PORT}`));
-  } catch (exception) {
-    console.log(exception.message);
+  if (request.method === "OPTIONS") {
+    request.headers["access-control-allow-methods"] =
+      "GET, POST, PUT, PATCH, DELETE";
+    response.status(200).json();
   }
+
+  next();
 };
 
-startApp();
+router.use(setup_request);
+router.use("/api/v1/admin", admin_route_handler);
+router.use("/api/v1/bookings", bookings_route_handler);
+router.use("/api/v1/facility", facility_route_handler);
+
+module.exports = router;

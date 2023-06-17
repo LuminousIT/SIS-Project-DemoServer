@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const route_handler = require("./routes/index");
+const route_handler = require("./api/index");
 const connectDB = require("./db/index");
 require("dotenv").config();
 
