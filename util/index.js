@@ -1,10 +1,10 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
   encryptPassword: async (password) => {
     const rounds = 10;
-    const salt = await bcrypt.genSalt(rounds);
+    const salt = await bcrypt.genSaltSync(rounds);
     const encryptedPassword = await bcrypt.hash(password, salt);
     return encryptedPassword;
   },
