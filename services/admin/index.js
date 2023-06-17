@@ -63,15 +63,21 @@ const login = async (request, response, next) => {
 
 const getAdmins = async (request, response, next) => {
   try {
-    //     const users = await AdminDB.find({}).exec();
-    //     if (!users) throw new Error("User does not exist");
-    return response.status(200).json({
-      status: "success",
-      content: { name: "samuel", another: "sherzod" },
-    });
+    const users = await AdminDB.find({}).exec();
+    if (!users) throw new Error("User does not exist");
+    return response.status(200).json({ status: "success", content: users });
   } catch (error) {
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
 
-module.exports = { registerAdmin, login, getAdmins };
+const getRFID = async (request, response, next) => {
+  try {
+    const body = request.body;
+    console.log({ body });
+    return response.status(200).json({ status: "success", content: body });
+  } catch (error) {
+    return response.status(500).json({ status: "failed", msg: error.message });
+  }
+};
+module.exports = { registerAdmin, login, getAdmins, getRFID };
