@@ -1,0 +1,74 @@
+const { SignUpSchema, LogInSchema } = require("../../schemas/admin");
+const AdminDB = require("../../model/admin");
+const {
+  encryptPassword,
+  checkIfPasswordMatch,
+  generateAuthToken,
+} = require("../../util");
+
+const registerAdmin = async (request, response, next) => {
+  try {
+    const { body } = request;
+    const { error } = SignUpSchema.validate(body);
+    if (error) throw new Error(error);
+
+    const { password, email } = body;
+    const existing_record = await AdminDB.findOne({ email });
+    if (existing_record) throw new Error("record exist");
+    if (password.length < 6) throw new Error("Password not strong enough");
+
+    const encryptedPassword = await encryptPassword(password);
+
+    const created_record = new AdminDB({
+      ...body,
+      password: encryptedPassword,
+    });
+    await created_record.save();
+    if (!created_record) throw new Error("Admin creation failed");
+
+    return response
+      .status(201)
+      .json({ status: "success", content: created_record });
+  } catch (error) {
+    return response.status(500).json({ status: "failed", msg: error.message });
+  }
+};
+
+const login = async (request, response, next) => {
+  try {
+    const { email, password } = request.body;
+    const { error } = LogInSchema.validate(request.body);
+    if (error) throw new Error(error);
+
+    const user_record = await AdminDB.findOne({ email }).exec();
+    if (!user_record) throw new Error("User does not exist");
+
+    const passwordIsCorrect = await checkIfPasswordMatch(
+      password,
+      user_record.password
+    );
+    if (passwordIsCorrect) {
+      const user = { ...user_record };
+      console.log({ user });
+      const authToken = await generateAuthToken({ ...user_record });
+      return response.status(200).json({ ...user._doc, token: authToken });
+    }
+    return response
+      .status(400)
+      .json({ status: "failed", content: "Email or Password incorrect" });
+  } catch (error) {
+    return response.status(500).json({ status: "failed", msg: error.message });
+  }
+};
+
+const getAdmins = async (request, response, next) => {
+  try {
+    const users = await AdminDB.find({}).exec();
+    if (!users) throw new Error("User does not exist");
+    return response.status(200).json({ status: "success", content: users });
+  } catch (error) {
+    return response.status(500).json({ status: "failed", msg: error.message });
+  }
+};
+
+module.exports = { registerAdmin, login, getAdmins };
