@@ -49,7 +49,7 @@ const login = async (request, response, next) => {
     );
     if (passwordIsCorrect) {
       const user = { ...user_record };
-      console.log({ user });
+
       const authToken = await generateAuthToken({ ...user_record });
       return response.status(200).json({ ...user._doc, token: authToken });
     }
@@ -85,7 +85,7 @@ const getHomepage = async (request, response, next) => {
   try {
     return response
       .status(200)
-      .json({ status: "success", content: "Hello World" });
+      .json({ status: "success", content: "Hello, World!" });
   } catch (error) {
     return response.status(500).json({ status: "failed", msg: error.message });
   }
