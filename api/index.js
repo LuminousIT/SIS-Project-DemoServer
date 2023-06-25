@@ -19,10 +19,10 @@ const setup_request = (request, response, next) => {
 };
 
 router.use(setup_request);
-router.use("/", getHomepage);
 router.use("/api/v1/admin", admin_route_handler);
 router.use("/api/v1/bookings", bookings_route_handler);
 router.use("/api/v1/facility", facility_route_handler);
 router.use("/api/v1/rfid", rfid_route_handler);
+router.use("/", getHomepage);
 
 module.exports = router;

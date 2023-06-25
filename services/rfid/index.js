@@ -31,6 +31,7 @@ const updateRfid = (request, response, next) => {
 const getRfid = async (request, response, next) => {
   try {
     const rfid_records = await RfidDB.find({}).exec();
+    console.log({ rfid_records });
     if (!rfid_records) throw new Error("rfid does not exist");
     return response
       .status(201)
