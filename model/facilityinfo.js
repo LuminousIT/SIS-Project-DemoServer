@@ -1,26 +1,32 @@
 const { model, Schema } = require("mongoose");
-
+const TimeBookedSchema = new Schema({
+  timeslot: Number,
+  isBooked: Boolean,
+});
 const FacilityInfoSchema = new Schema({
-  id: {
+  fID: {
     type: Number,
-    required: true,
-    default: 0,
   },
   name: {
     type: String,
-    required: [true, "Name cannot be empty"],
+    required: true,
   },
   maxPeople: {
     type: Number,
   },
+  //   timeBooked: {
+  //     type: [TimeBookedSchema],
+  //     default: [],
+  //   },
   timeBooked: [
     {
-      timeslot: Boolean,
+      timeslot: Number,
+      isBooked: Boolean,
     },
   ],
   currentPeople: [
     {
-      bookingId: Number,
+      type: String,
     },
   ],
   created_on: {

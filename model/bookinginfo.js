@@ -1,12 +1,12 @@
+const { array } = require("joi");
 const { model, Schema } = require("mongoose");
 
 const BookingInfoSchema = new Schema({
   id: {
     type: Number,
     required: true,
-    default: 0,
   },
-  facilityID: {
+  fID: {
     type: Number,
   },
   timeBooked: {
@@ -21,8 +21,14 @@ const BookingInfoSchema = new Schema({
     type: Number,
   },
   userID: {
-    type: Number,
+    type: String,
   },
+  //   booking: [
+  //     {
+  //       fID: Number,
+  //       timeBooked: Number,
+  //     },
+  //   ],
   created_on: {
     type: Date,
     required: true,
