@@ -7,7 +7,6 @@ const {
 } = require("../../services/admin");
 
 const router = require("express").Router();
-// router.route("/").get(getHomepage);
 router.route("/register").post(registerAdmin);
 router.route("/login").post(login);
 router.route("/").get(getAdmins);
