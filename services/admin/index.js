@@ -51,7 +51,11 @@ const login = async (request, response, next) => {
       const user = { ...user_record };
 
       const authToken = await generateAuthToken({ ...user_record });
-      return response.status(200).json({ ...user._doc, token: authToken });
+      return response.status(200).json({
+        status: "success",
+        content: { ...user._doc },
+        token: authToken,
+      });
     }
     return response
       .status(400)
