@@ -23,6 +23,9 @@ const BookingInfoSchema = new Schema({
   userID: {
     type: String,
   },
+  userEmail: {
+    type: String,
+  },
   //   booking: [
   //     {
   //       fID: Number,
