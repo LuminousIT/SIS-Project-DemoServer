@@ -3,11 +3,11 @@ const { model, Schema } = require("mongoose");
 
 const BookingInfoSchema = new Schema({
   id: {
-    type: Number,
+    type: String,
     required: true,
   },
   fID: {
-    type: Number,
+    type: String,
   },
   timeBooked: {
     type: Number,
@@ -18,7 +18,7 @@ const BookingInfoSchema = new Schema({
     default: () => new Date(),
   },
   rfID: {
-    type: Number,
+    type: String,
   },
   userID: {
     type: String,

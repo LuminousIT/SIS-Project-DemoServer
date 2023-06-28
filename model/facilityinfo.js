@@ -5,7 +5,7 @@ const TimeBookedSchema = new Schema({
 });
 const FacilityInfoSchema = new Schema({
   fID: {
-    type: Number,
+    type: String,
   },
   name: {
     type: String,

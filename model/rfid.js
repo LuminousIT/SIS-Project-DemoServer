@@ -2,15 +2,15 @@ const { model, Schema } = require("mongoose");
 
 const RfidSchema = new Schema({
   id: {
-    type: Number,
+    type: String,
     required: true,
     default: 0,
   },
   userID: {
-    type: Number,
+    type: String,
   },
   rfID: {
-    type: Number,
+    type: String,
   },
   created_on: {
     type: Date,

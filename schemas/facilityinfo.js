@@ -5,5 +5,5 @@ module.exports.FacilityInfoSchema = Joi.object({
   maxPeople: Joi.number(),
   timeBooked: Joi.array(),
   currentPeople: Joi.array(),
-  fID: Joi.number(),
+  fID: Joi.string(),
 });
