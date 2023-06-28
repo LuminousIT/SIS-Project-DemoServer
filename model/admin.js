@@ -3,7 +3,7 @@ const { model, Schema } = require("mongoose");
 const AdminSchema = new Schema({
   id: {
     type: String,
-    required: true,
+    // required: true,
     // default: 0,
   },
   email: {
