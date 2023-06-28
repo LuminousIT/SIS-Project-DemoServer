@@ -13,6 +13,7 @@ const createFacility = async (request, response, next) => {
       .status(200)
       .json({ status: "success", content: created_facility });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -31,6 +32,7 @@ const updateFacility = async (request, response, next) => {
     if (!updated) throw new Error("Facility Update failed");
     return response.status(200).json({ status: "success", content: updated });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -43,6 +45,7 @@ const getFacilities = async (request, response, next) => {
       .status(200)
       .json({ status: "success", content: facilities });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -56,6 +59,7 @@ const getFacilityByID = async (request, response, next) => {
       .status(200)
       .json({ status: "success", content: facilities });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -68,6 +72,7 @@ const deleteFacilityByID = async (request, response, next) => {
     if (!facility) throw new Error("Facility does not exist");
     return response.status(200).json({ status: "success", content: facility });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };

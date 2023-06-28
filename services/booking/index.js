@@ -55,6 +55,7 @@ const createBooking = async (request, response, next) => {
     if (!created) throw new Error("Booking Creation Failed");
     return response.status(200).json({ status: "success", content: created });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -69,6 +70,7 @@ const updateBooking = async (request, response, next) => {
     if (!updated) throw new Error("BookingInfo Update failed");
     return response.status(200).json({ status: "success", content: updated });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -79,6 +81,7 @@ const getBookings = async (request, response, next) => {
     if (!bookings) throw new Error("Booking does not exist");
     return response.status(200).json({ status: "success", content: bookings });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -93,6 +96,7 @@ const getBookingsByID = async (request, response, next) => {
       .status(200)
       .json({ status: "success", content: booking_record });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };

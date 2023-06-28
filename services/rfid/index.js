@@ -19,6 +19,7 @@ const createRfid = async (request, response, next) => {
       .status(201)
       .json({ status: "success", content: created_record });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -36,6 +37,7 @@ const getRfid = async (request, response, next) => {
       .status(201)
       .json({ status: "success", content: rfid_records });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };

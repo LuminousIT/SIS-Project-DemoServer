@@ -26,6 +26,11 @@ const AdminSchema = new Schema({
     required: true,
     default: () => Date.now(),
   },
+  usertype: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
   created_on: {
     type: Date,
     required: true,

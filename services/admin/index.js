@@ -30,6 +30,7 @@ const registerAdmin = async (request, response, next) => {
       .status(201)
       .json({ status: "success", content: created_record });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -61,6 +62,7 @@ const login = async (request, response, next) => {
       .status(400)
       .json({ status: "failed", content: "Email or Password incorrect" });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -71,6 +73,7 @@ const getAdmins = async (request, response, next) => {
     if (!users) throw new Error("User does not exist");
     return response.status(200).json({ status: "success", content: users });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -81,6 +84,7 @@ const getRFID = async (request, response, next) => {
     console.log({ body });
     return response.status(200).json({ status: "success", content: body });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };
@@ -91,6 +95,7 @@ const getHomepage = async (request, response, next) => {
       .status(200)
       .json({ status: "success", content: "Hello, World!" });
   } catch (error) {
+    console.log(error.message);
     return response.status(500).json({ status: "failed", msg: error.message });
   }
 };

@@ -5,6 +5,7 @@ module.exports.SignUpSchema = Joi.object({
   firstname: Joi.string().required(),
   lastname: Joi.string().required(),
   password: Joi.string().min(6).required(),
+  usertype: Joi.number(),
 });
 
 module.exports.LogInSchema = Joi.object({
